@@ -107,15 +107,18 @@ Car.prototype.fill = function(gallons){
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-Baby.prototype = Person.prototype;
+
+
 function Baby(name, age, favoriteToy) {
-  this.name = name;
-  this.age = age;
+  Person.call(this, name, age);
   this.favoriteToy = favoriteToy;
   this.play = function(){
     return `Playing with ${this.favoriteToy}`
   }
 }
+
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.constructor = Baby;
 
 Baby.prototype.play = function(){
   this.play = function(favoriteToy){
@@ -126,10 +129,10 @@ Baby.prototype.play = function(){
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. When stated without context, like in a function; the "this" keyword refers to the global object, or basically is undefined.
+  2. When used within a method, the this keyword refers to the object the method was called on.
+  3. is naturally implicitly bound. Refers to the object to the left of the method it was used in.
+  4. can be redefined using call bind or apply
 */
 
 
